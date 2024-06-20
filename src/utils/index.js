@@ -14,7 +14,7 @@ const projects = [
     title: "Todo App",
     description: "A product search application using React and Tailwind CSS.",
     image: "https://via.placeholder.com/150",
-    src: "/search",
+    src: "/todo",
   },
 
   {
@@ -22,7 +22,7 @@ const projects = [
     title: "Calculator App",
     description: "A product search application using React and Tailwind CSS.",
     image: "https://via.placeholder.com/150",
-    src: "/search",
+    src: "/calculator",
   },
   {
     id: 1,

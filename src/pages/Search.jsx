@@ -78,7 +78,7 @@ const Search = () => {
                 key={suggestion.id}
                 className="mb-2 p-2 border rounded-lg bg-gray-50"
               >
-                <h2 className="text-md font-semibold">{suggestion.title}</h2>
+                <h2 className="text-md font-mono">{suggestion.title}</h2>
               </li>
             ))}
         </ul>
