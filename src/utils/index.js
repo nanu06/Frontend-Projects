@@ -5,7 +5,8 @@ const projects = [
     description: "A product search application using React and Tailwind CSS.",
     image:
       "https://via.placeholder.com/150/0000FF/808080?text=Search+Product+App",
-    src: "/search",
+    src: "/search" 
+    ,
   },
 
   {
