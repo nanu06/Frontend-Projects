@@ -55,6 +55,22 @@ const projects = [
     image: "https://via.placeholder.com/150",
     src: "/imageGallery",
   },
+  {
+    id: 8,
+    title: "Pagination",
+    description:
+      "An image gallery application created with React and styled using Tailwind CSS.",
+    image: "https://via.placeholder.com/150",
+    src: "/pagination",
+  },
+  {
+    id: 9,
+    title: "Chat App",
+    description:
+      "An image gallery application created with React and styled using Tailwind CSS.",
+    image: "https://via.placeholder.com/150",
+    src: "/chatApp",
+  },
 ];
 
 export default projects;
