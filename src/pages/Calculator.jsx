@@ -1,211 +1,142 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import  { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Calculator = () => {
-  const [display, setDisplay] = useState("");
-  const [currentValue, setCurrentValue] = useState("");
-  const [previousValue, setPreviousValue] = useState("");
-  const [operator, setOperator] = useState("");
-  const [resultDisplayed, setResultDisplayed] = useState(false); 
+  const [input, setInput] = useState('');
+  const [result, setResult] = useState('');
 
-  const handleNumberClick = (num) => {
-    if (resultDisplayed) {
-      setDisplay(num);
-      setCurrentValue(num);
-      setResultDisplayed(false);
-    } else {
-      setDisplay(display + num);
-      setCurrentValue(currentValue + num);
-    }
-  };
-
-  const handleOperatorClick = (op) => {
-    if (operator) {
-      calculate();
-    } else {
-      setPreviousValue(currentValue);
-    }
-    setOperator(op);
-    setDisplay(display + op);
-    setResultDisplayed(false);
-  };
-
-  const handleClear = () => {
-    setDisplay("");
-    setCurrentValue("");
-    setPreviousValue("");
-    setOperator("");
-    setResultDisplayed(false);
-  };
-
-  const handleEquals = () => {
-    calculate();
-    setResultDisplayed(true);
-  };
-
-  const handleBackspace = () => {
-    if (display.length > 0) {
-      const newDisplay = display.slice(0, -1);
-      setDisplay(newDisplay);
-      setCurrentValue(newDisplay);
+  const handleClick = (value) => {
+    switch (value) {
+      case '=':
+        calculate();
+        break;
+      case 'C':
+        clear();
+        break;
+      case '⌫':
+        backspace();
+        break;
+      default:
+        setInput(input + value);
+        break;
     }
   };
 
   const calculate = () => {
-    let result;
-    switch (operator) {
-      case "+":
-        result = parseFloat(previousValue) + parseFloat(currentValue);
-        break;
-      case "-":
-        result = parseFloat(previousValue) - parseFloat(currentValue);
-        break;
-      case "*":
-        result = parseFloat(previousValue) * parseFloat(currentValue);
-        break;
-      case "/":
-        result = parseFloat(previousValue) / parseFloat(currentValue);
-        break;
-      default:
-        return;
+    try {
+      const evalResult = evaluateExpression(input);
+      setResult(evalResult.toString());
+    } catch (error) {
+      setResult('Error');
     }
-    setDisplay(result.toString());
-    setCurrentValue(result.toString());
-    setPreviousValue("");
-    setOperator("");
   };
 
-  const handleKeyPress = (event) => {
-    const key = event.key;
-    if (/[0-9]/.test(key)) {
-      handleNumberClick(key);
-    } else if (["+", "-", "*", "/"].includes(key)) {
-      handleOperatorClick(key);
-    } else if (key === ".") {
-      handleNumberClick(key);
-    } else if (key === "Enter") {
-      handleEquals();
-    } else if (key === "Backspace") {
-      handleBackspace();
-    }
+  const evaluateExpression = (expr) => {
+    const operators = {
+      '+': (a, b) => a + b,
+      '-': (a, b) => a - b,
+      '*': (a, b) => a * b,
+      '/': (a, b) => a / b,
+    };
+
+    const parseExpression = (expression) => {
+      const numbers = expression.split(/[-+*/]/).map(Number);
+      const ops = expression.split(/[0-9]+/).filter(op => op);
+
+      let result = numbers[0];
+      for (let i = 0; i < ops.length; i++) {
+        const operator = ops[i];
+        const number = numbers[i + 1];
+        if (operator in operators) {
+          result = operators[operator](result, number);
+        }
+      }
+      return result;
+    };
+
+    return parseExpression(expr);
+  };
+
+  const clear = () => {
+    setInput('');
+    setResult('');
+  };
+
+  const backspace = () => {
+    setInput(input.slice(0, -1));
   };
 
   return (
-    <>
-      <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
-        <div className="bg-white p-8 rounded-lg shadow-lg">
-          <h1 className="text-3xl font-bold mb-4">Calculator</h1>
-          <div className="mb-4 text-2xl font-bold text-right">{display}</div>
-          <div className="grid grid-cols-4 gap-4">
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-80">
+        <h1 className="text-4xl font-bold mb-6 text-center text-gray-800">
+          Calculator
+        </h1>
+        <div className="mb-6">
+          <input
+            type="text"
+            className="border-gray-300 border rounded p-2 w-full text-right text-xl bg-gray-100 focus:outline-none"
+            placeholder="0"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+          />
+          <input
+            type="text"
+            className="border-gray-300 border rounded p-2 w-full text-right text-xl mt-4 bg-gray-100 focus:outline-none"
+            placeholder="Result"
+            value={result}
+            readOnly
+          />
+        </div>
+        <div className="grid grid-cols-4 gap-4">
+          {["7", "8", "9", "/"].map((value) => (
             <button
-              className="col-span-3 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg"
-              onClick={() => handleClear()}
+              key={value}
+              className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-4 rounded transition duration-300"
+              onClick={() => handleClick(value)}
             >
-              AC
+              {value}
             </button>
+          ))}
+          {["4", "5", "6", "*"].map((value) => (
             <button
-              className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg"
-              onClick={() => handleOperatorClick("/")}
+              key={value}
+              className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-4 rounded transition duration-300"
+              onClick={() => handleClick(value)}
             >
-              /
+              {value}
             </button>
+          ))}
+          {["1", "2", "3", "-"].map((value) => (
             <button
-              className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg"
-              onClick={() => handleNumberClick("7")}
+              key={value}
+              className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-4 rounded transition duration-300"
+              onClick={() => handleClick(value)}
             >
-              7
+              {value}
             </button>
+          ))}
+          {["0", ".", "C", "+"].map((value) => (
             <button
-              className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg"
-              onClick={() => handleNumberClick("8")}
+              key={value}
+              className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-4 rounded transition duration-300"
+              onClick={() => handleClick(value)}
             >
-              8
+              {value}
             </button>
-            <button
-              className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg"
-              onClick={() => handleNumberClick("9")}
-            >
-              9
-            </button>
-            <button
-              className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg"
-              onClick={() => handleOperatorClick("*")}
-            >
-              *
-            </button>
-            <button
-              className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg"
-              onClick={() => handleNumberClick("4")}
-            >
-              4
-            </button>
-            <button
-              className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg"
-              onClick={() => handleNumberClick("5")}
-            >
-              5
-            </button>
-            <button
-              className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg"
-              onClick={() => handleNumberClick("6")}
-            >
-              6
-            </button>
-            <button
-              className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg"
-              onClick={() => handleOperatorClick("-")}
-            >
-              -
-            </button>
-            <button
-              className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg"
-              onClick={() => handleNumberClick("1")}
-            >
-              1
-            </button>
-            <button
-              className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg"
-              onClick={() => handleNumberClick("2")}
-            >
-              2
-            </button>
-            <button
-              className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg"
-              onClick={() => handleNumberClick("3")}
-            >
-              3
-            </button>
-            <button
-              className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg"
-              onClick={() => handleOperatorClick("+")}
-            >
-              +
-            </button>
-            <button
-              className="col-span-2 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg"
-              onClick={() => handleNumberClick("0")}
-            >
-              0
-            </button>
-            <button
-              className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg"
-              onClick={() => handleNumberClick(".")}
-            >
-              .
-            </button>
-            <button
-              className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg"
-              onClick={() => handleEquals()}
-            >
-              =
-            </button>
-            <button
-              className="col-span-2 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg"
-              onClick={() => handleBackspace()}
-            >
-              Backspace
-            </button>
-          </div>
+          ))}
+          <button
+            className="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-4 col-span-2 rounded transition duration-300"
+            onClick={() => handleClick("⌫")}
+          >
+            ⌫
+          </button>
+          <button
+            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 col-span-2 rounded transition duration-300"
+            onClick={() => handleClick("=")}
+          >
+            =
+          </button>
         </div>
       </div>
       <div className="fixed bottom-0 left-0 w-full bg-white p-4 border-t text-center">
@@ -216,7 +147,7 @@ const Calculator = () => {
           Back to Home
         </Link>
       </div>
-    </>
+    </div>
   );
 };
 
