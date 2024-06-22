@@ -1,10 +1,17 @@
+import search from '../assets/search.png';
+import todo from '../assets/todo.png';
+import calculator from '../assets/calculator.png';
+import wether from '../assets/wether.png';
+import ecommerce from '../assets/ecommerce.png';
+import form from '../assets/form.png';
+import pagination from '../assets/pagination.png';
+import chatApp from '../assets/chatApp.png'
 const projects = [
   {
     id: 1,
     title: "Search App",
     description: "A product search application using React and Tailwind CSS.",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMXyEfhQScVwnKQdm5v4K1j_Wan5XeETiPPg&s",
+    image: search,
     src: "/search",
   },
   {
@@ -12,7 +19,7 @@ const projects = [
     title: "Todo App",
     description:
       "A simple todo application built with React and Tailwind CSS for managing tasks.",
-    image: "https://via.placeholder.com/150",
+    image: todo,
     src: "/todo",
   },
   {
@@ -20,7 +27,7 @@ const projects = [
     title: "Calculator App",
     description:
       "A basic calculator application implemented using React and styled with Tailwind CSS.",
-    image: "https://via.placeholder.com/150",
+    image: calculator,
     src: "/calculator",
   },
   {
@@ -28,7 +35,7 @@ const projects = [
     title: "Weather App",
     description:
       "An application to display weather information using React and styled with Tailwind CSS.",
-    image: "https://via.placeholder.com/150",
+    image: wether,
     src: "/wether",
   },
   {
@@ -36,7 +43,7 @@ const projects = [
     title: "Shopping Cart",
     description:
       "A simple shopping cart application developed with React and Tailwind CSS.",
-    image: "https://via.placeholder.com/150",
+    image: ecommerce,
     src: "/ecommerce",
   },
   {
@@ -44,16 +51,16 @@ const projects = [
     title: "Form with Validation",
     description:
       "A form application with validation features built using React and Tailwind CSS.",
-    image: "https://via.placeholder.com/150",
+    image: form,
     src: "/form",
   },
- 
+
   {
     id: 7,
     title: "Pagination",
     description:
       "An pagination application created with React and styled using Tailwind CSS.",
-    image: "https://via.placeholder.com/150",
+    image: pagination,
     src: "/pagination",
   },
   {
@@ -61,7 +68,7 @@ const projects = [
     title: "Chat App",
     description:
       "An chat application created with React and styled using Tailwind CSS.",
-    image: "https://via.placeholder.com/150",
+    image: chatApp,
     src: "/chatApp",
   },
 ];

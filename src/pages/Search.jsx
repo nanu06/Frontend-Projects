@@ -99,7 +99,7 @@ const Search = () => {
       <div className="fixed bottom-0 left-0 w-full bg-white p-4 border-t text-center">
         <Link
           to="/"
-          className="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-600"
+          className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
         >
           Back to Home
         </Link>
