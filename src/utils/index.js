@@ -52,7 +52,7 @@ const projects = [
     id: 7,
     title: "Pagination",
     description:
-      "An image gallery application created with React and styled using Tailwind CSS.",
+      "An pagination application created with React and styled using Tailwind CSS.",
     image: "https://via.placeholder.com/150",
     src: "/pagination",
   },
@@ -60,7 +60,7 @@ const projects = [
     id: 8,
     title: "Chat App",
     description:
-      "An image gallery application created with React and styled using Tailwind CSS.",
+      "An chat application created with React and styled using Tailwind CSS.",
     image: "https://via.placeholder.com/150",
     src: "/chatApp",
   },
@@ -83,9 +83,6 @@ export default projects;
 // 5. Form with Validation
 // Requirements: Create a form with various input fields and implement validation for each field.
 // Skills Tested: Form handling, validation, state management.
-// 6. Image Gallery
-// Requirements: Create an image gallery that fetches images from an API and displays them with options to filter or sort.
-// Skills Tested: API calls, handling lists and grids, state management.
 // 7. Chat Application
 // Requirements: Implement a basic chat interface where messages can be sent and received.
 // Skills Tested: Real-time data handling (using websockets or mock data), state management.
