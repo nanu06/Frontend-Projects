@@ -47,16 +47,9 @@ const projects = [
     image: "https://via.placeholder.com/150",
     src: "/form",
   },
+ 
   {
     id: 7,
-    title: "Image Gallery",
-    description:
-      "An image gallery application created with React and styled using Tailwind CSS.",
-    image: "https://via.placeholder.com/150",
-    src: "/imageGallery",
-  },
-  {
-    id: 8,
     title: "Pagination",
     description:
       "An image gallery application created with React and styled using Tailwind CSS.",
@@ -64,7 +57,7 @@ const projects = [
     src: "/pagination",
   },
   {
-    id: 9,
+    id: 8,
     title: "Chat App",
     description:
       "An image gallery application created with React and styled using Tailwind CSS.",

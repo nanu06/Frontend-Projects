@@ -8,7 +8,6 @@ import Todo from "./pages/Todo.jsx";
 import Ecommerce from "./pages/Ecommerce.jsx";
 import Form from "./pages/Form.jsx";
 import Pagination from "./pages/Pagination.jsx";
-import ImageGallery from "./pages/ImageGallery.jsx";
 import Wether from "./pages/Wether.jsx";
 import ChatApp from "./pages/ChatApp.jsx";
 
@@ -22,7 +21,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <Route path="/ecommerce" element={<Ecommerce />}></Route>
       <Route path="/form" element={<Form />}></Route>
       <Route path="/pagination" element={<Pagination />}></Route>
-      <Route path="/imageGallery" element={<ImageGallery />}></Route>
       <Route path="/wether" element={<Wether />}></Route>
       <Route path="/chatApp" element={<ChatApp />}></Route>\{" "}
     </Routes>
